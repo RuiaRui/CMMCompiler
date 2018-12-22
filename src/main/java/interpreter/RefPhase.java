@@ -289,15 +289,16 @@ public class RefPhase extends CMMBaseVisitor<ReturnValue> {
                         if (value.getType() == Type.tDouble) {
                             leftValue.setValue(value.getValue(leftValue.getType()));
 
-                        } else {
+                        }else if(value.getType() == Type.tInt){
+                            Warning.unmatched_type_warning(io,token);
+                        }
+                        else {
                             Error.unmatched_type_error(io, token);
                         }
                     } else if (leftValue.getType() == Type.tInt) {
                         if (value.getType() == Type.tInt) {
                             leftValue.setValue(value.getValue(leftValue.getType()));
-                        }else if(value.getType() == Type.tDouble){
-                            Warning.unmatched_type_warning(io,token);
-                        } else {
+                        }else {
                             Error.unmatched_type_error(io, token);
                         }
                     } else if (leftValue.getType() == Type.tBool) {
